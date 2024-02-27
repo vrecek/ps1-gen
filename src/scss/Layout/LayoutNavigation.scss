@@ -1,0 +1,59 @@
+@import '../config';
+
+
+nav.layout-navigation {
+    @include Flex(sb, c);
+    padding: 0 1em;
+    height: $navHeight;
+
+    section {
+        &.logo {
+            &, figure {
+                @include Flex(none, c);
+            }
+
+            p {
+                font-family: 'Roboto Mono';
+                font-weight: 800;
+                font-size: 1.25rem;
+                letter-spacing: -1px;
+            }
+
+            figure {
+                margin-left: .5em;
+                @include FullSize(40px);
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        &.nav-icons,
+        &.social-icons {
+            @include Flex(none, c);
+
+            &.nav-icons span.icon {
+                margin-left: 1em;
+            }
+            
+            &.social-icons span.icon {
+                margin-right: 1em;
+            }
+
+            span.icon {
+                @include FullSize(35px);
+                cursor: pointer;
+                transition: .25s;
+
+                svg {
+                    @include FullSize;
+                }
+
+                &:hover {
+                    color: $clr-bluel;
+                }
+            }
+        }
+    }
+}
