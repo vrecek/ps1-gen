@@ -1,0 +1,34 @@
+@import '../config';
+
+
+main.shellpage {
+    padding: 2em 4em;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 1em;
+    }
+
+    div.main-wrap {
+        @include Flex(sb);
+
+        p.title {
+            text-transform: uppercase;
+            font-size: .9rem;
+            font-weight: 800;
+            margin-bottom: 1em;
+        }
+
+        section.elem-wrap {
+            width: 55%;
+
+            section.options-panel,
+            section.elements-panel,
+            section.output-panel {
+                width: 100%;
+                padding: 1em;
+            }
+        }
+    }
+}

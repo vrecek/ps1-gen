@@ -1,0 +1,41 @@
+@import '../config';
+
+
+section.options-panel {
+    margin-top: 2em;
+
+    div.wrap {
+        display: flex;
+        flex-wrap: wrap;
+
+        div.option {
+            border-radius: .5em;
+            margin-right: .5em;
+            padding: .75em;
+            background: $clr-blackl;
+            @include Flex(c, c, c);
+            cursor: pointer;
+            transition: .25s;
+
+            &.disabled {
+                pointer-events: none;
+                opacity: .2;
+            }
+
+            p {
+                font-weight: 600;
+                font-size: .9rem;
+            }
+
+            span {
+                margin-bottom: 1em;
+                @include FullSize(40px);
+                color: $clr-whitedr;
+
+                svg {
+                    @include FullSize;
+                }
+            }
+        }
+    }
+}

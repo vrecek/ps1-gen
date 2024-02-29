@@ -2,12 +2,13 @@
 
 
 header.home-header {
-    @include Flex(sb, c);
-    padding: 4em 6em;
+    @include Flex(sa, c);
+    padding: 4em;
     height: calc(100vh - $navHeight);
 
     section.image-container {
         width: 40%;
+        margin-right: 4em;
 
         div.ln {
             width: 50%;

@@ -1,0 +1,37 @@
+@import '../config';
+
+
+section.elements-panel {
+    div.wrap {
+        display: flex;
+        margin-bottom: 2em;
+
+        div {
+            @include Flex(none, c);
+            background: $clr-blackl;
+            padding: .75em;
+            border-radius: .5em;
+            margin-right: .5em;
+            cursor: pointer;
+
+            p {
+                font-size: .85rem;
+                font-weight: 500;
+            }
+
+            span {
+                @include FullSize(20px);
+                margin-left: .5em;
+                transition: .25s;
+
+                svg {
+                    @include FullSize;
+                }
+
+                &:hover {
+                    color: $clr-red;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+@import '../config';
+
+
+aside.add-panel {
+    width: 28%;
+
+    div.custom-text {
+        p {
+            font-size: .9rem;
+            font-weight: 600;
+            margin-bottom: .5em;
+        }
+
+        div {
+            @include Flex(none, c);
+            
+            input {
+                outline: 0;
+                border: 0;
+                flex-grow: 1;
+                border: 2px solid $clr-blacklr;
+                padding: .75em;
+                color: $clr-whitel;
+                border-radius: .15em;
+                background: $clr-blackd;
+            }
+    
+            span {
+                @include FullSize(45px);
+                cursor: pointer;
+    
+                svg {
+                    @include FullSize;
+                }
+            }
+        }
+    }
+
+    div.wrap-default {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2em;
+
+        p {
+            width: 45%;
+            padding: 1em .75em;
+            margin-right: 1em;
+            margin-bottom: 1.5em;
+            cursor: pointer;
+            background: $clr-blacklr;
+            border-radius: .25em;
+            font-size: .9rem;
+            font-weight: 600;
+        }
+    }
+}

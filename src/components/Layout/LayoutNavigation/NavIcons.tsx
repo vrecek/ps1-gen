@@ -9,9 +9,9 @@ const NavIcons = () => {
     const n:     NavigateFunction = useNavigate()
     const icons: INavbarLinks[] = [
 
-        { icon: <SiZsh />, url: '/' },
+        { icon: <SiZsh />, url: '/zsh' },
         { icon: <SiGnubash />, url: '/bash' },
-        { icon: <GoHomeFill />, url: '/zsh' }
+        { icon: <GoHomeFill />, url: '/' }
         
     ]
 

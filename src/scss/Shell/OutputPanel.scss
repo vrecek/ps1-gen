@@ -1,0 +1,39 @@
+@import '../config';
+
+
+section.output-panel {
+    div {
+        @include Flex(sb, c);
+        margin-top: .25em;
+        background: $clr-blackl;
+        padding: 1em;
+
+        p.out {
+            font-size: .9rem;    
+            color: $clr-whited;
+            font-weight: 500;
+            font-family: 'Roboto Mono';
+        }
+
+        span {
+            @include FullSize(35px);
+            margin-left: 1em;
+            cursor: pointer;
+            position: relative;
+
+            i {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                translate: -50% -150%;
+                white-space: nowrap;
+                font-weight: 800;
+            }
+
+            svg {
+                @include FullSize;
+                transition: .2s;
+                }
+        }
+    }
+}
