@@ -6,7 +6,7 @@ import { FaRegClipboard } from "react-icons/fa";
 const OutputPanel = () => {
     const copyToClipboard = (e: React.MouseEvent): void => {
         const t:   HTMLElement = e.currentTarget! as HTMLElement,
-              svg: HTMLElement = [...t.children as HTMLCollectionOf<HTMLElement>].slice(-1)[0]
+              svg: HTMLElement = [...t.children].slice(-1)[0] as HTMLElement
 
 
         window.navigator.clipboard.writeText('xdd')

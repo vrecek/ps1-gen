@@ -3,33 +3,61 @@
 
 section.elements-panel {
     div.wrap {
-        display: flex;
-        margin-bottom: 2em;
+        margin: 1em 0 2em 0;
+        position: relative;
 
-        div {
-            @include Flex(none, c);
-            background: $clr-blackl;
-            padding: .75em;
-            border-radius: .5em;
-            margin-right: .5em;
+        span.element-arrow {
+            position: absolute;
             cursor: pointer;
+            top: 50%;
+            @include FullSize(25px);
 
-            p {
-                font-size: .85rem;
-                font-weight: 500;
+            svg {
+                @include FullSize;
             }
 
-            span {
-                @include FullSize(20px);
-                margin-left: .5em;
-                transition: .25s;
+            &:first-child {
+                left: 0;
+                translate: -110% -50%;
+            }
 
-                svg {
-                    @include FullSize;
+            &:last-child {
+                right: 0;
+                translate: 110% -50%;
+            }
+        }
+
+        div.overflow {
+            display: flex;
+            overflow: hidden;
+            scroll-behavior: smooth;
+
+            div {
+                @include Flex(none, c);
+                background: $clr-blackl;
+                padding: .75em;
+                border-radius: .5em;
+                margin-right: .5em;
+                cursor: pointer;
+                flex-shrink: 0;
+    
+                p {
+                    font-size: .85rem;
+                    font-weight: 500;
                 }
-
-                &:hover {
-                    color: $clr-red;
+    
+                span {
+                    @include FullSize(20px);
+                    margin-left: .5em;
+                    transition: .25s;
+    
+                    svg {
+                        @include FullSize;
+                    }
+    
+                    &:hover {
+                        color: $clr-redl;
+                    }
                 }
             }
         }

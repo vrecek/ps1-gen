@@ -1,20 +1,32 @@
 import '@/css/AddPanel.css'
-import { IPanelOption } from '@/interfaces/ShellInterfaces'
+import { IElementsStateFn, IPanelOption } from '@/interfaces/ShellInterfaces'
 import CustomText from './CustomText'
 import OptionsPanel from '../OptionsPanel/OptionsPanel'
+import React from 'react'
 
 
-const AddPanel = () => {
+const AddPanel = ({ setElements }: IElementsStateFn) => {
     const options: IPanelOption[] = [
-        { name: 'Hostname', value: '%m' },
-        { name: 'Username', value: '%n' },
-        { name: 'Current Path', value: '%~' },
-        { name: 'Full path', value: '%/' },
-        { name: '24 hour time', value: '%T' },
-        { name: 'AM/PM time', value: '%t' },
-        { name: 'YY-MM-DD Date', value: '%D' },
-        { name: 'DD-MM-YY Date', value: '%D{%d-%m-%Y}' },
-    ]
+        { text: 'Hostname', value: '%m' },
+        { text: 'Username', value: '%n' },
+        { text: 'Current Path', value: '%~' },
+        { text: 'Full path', value: '%/' },
+        { text: '24 hour time', value: '%T' },
+        { text: 'AM/PM time', value: '%t' },
+        { text: 'YY-MM-DD', value: '%D' },
+        { text: 'DD-MM-YY', value: '%D{%d-%m-%Y}' },
+    ].map(x => { return {...x, id: Math.random().toString(16).slice(2) } })
+
+    const addElement = (e: React.MouseEvent, type: IPanelOption): void => {
+        const t: HTMLElement = e.currentTarget! as HTMLElement
+        t.style.scale = '.9'
+        setTimeout(() => t.style.scale = '1', 100)
+
+        setElements(curr => {
+            curr.push({...type})
+            return [...curr]
+        }) 
+    }
 
 
     return (
@@ -26,7 +38,9 @@ const AddPanel = () => {
 
                 {
                     options.map((x, i) => (
-                        <p key={i}>{x.name}</p>
+                        <p onClick={(e) => addElement(e, x)} key={i}>
+                            {x.text}
+                        </p>
                     ))
                 }
 

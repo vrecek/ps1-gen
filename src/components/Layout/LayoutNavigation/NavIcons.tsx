@@ -11,7 +11,7 @@ const NavIcons = () => {
 
         { icon: <SiZsh />, url: '/zsh' },
         { icon: <SiGnubash />, url: '/bash' },
-        { icon: <GoHomeFill />, url: '/' }
+        { icon: <GoHomeFill />, url: '/', cname: 'home' }
         
     ]
 
@@ -24,7 +24,7 @@ const NavIcons = () => {
                     <Icon
                         key={i}
                         icon={x.icon}
-                        cname="icon"
+                        cname={`icon ${x.cname}`}
                         clickFn={() => n(x.url)}
                     />
                 ))

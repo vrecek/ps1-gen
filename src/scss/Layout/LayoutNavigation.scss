@@ -46,6 +46,10 @@ nav.layout-navigation {
                 cursor: pointer;
                 transition: .25s;
 
+                &.home {
+                    margin-left: 3em;
+                }
+
                 svg {
                     @include FullSize;
                 }
