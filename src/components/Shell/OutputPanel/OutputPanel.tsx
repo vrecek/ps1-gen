@@ -1,17 +1,17 @@
 import Icon from '@/components/Common/Icon';
 import '@/css/OutputPanel.css'
-import { FaRegClipboard } from "react-icons/fa";
+import { IElementsState } from '@/interfaces/ShellInterfaces';
+import { FaRegClipboard, FaRegTrashAlt } from "react-icons/fa";
 
 
-const OutputPanel = () => {
-    const copyToClipboard = (e: React.MouseEvent): void => {
-        const t:   HTMLElement = e.currentTarget! as HTMLElement,
-              svg: HTMLElement = [...t.children].slice(-1)[0] as HTMLElement
+const OutputPanel = ({ elements, setElements }: IElementsState) => {
+    const iconAction = (fn: () => void, e: React.MouseEvent, clickColor: string, iText?: string): void => {
+        const t:      HTMLElement = e.currentTarget! as HTMLElement,
+              svg:    HTMLElement = [...t.children][0] as HTMLElement
 
+        fn()
 
-        window.navigator.clipboard.writeText('xdd')
-
-        svg.style.color = 'rgb(109, 160, 255)'
+        svg.style.color = clickColor
         svg.style.scale = '.85'
 
         setTimeout(() => {
@@ -19,26 +19,49 @@ const OutputPanel = () => {
             svg.style.scale = '1'
         }, 200)
 
-        const i: HTMLElement = document.createElement('i')
-        i.textContent = 'Copied ✅'
-        t.prepend(i)
+        if (iText) {
+            const i: HTMLElement = document.createElement('i')
+            i.textContent = iText
+            t.append(i)
 
-        setTimeout(() => i.remove(), 1500)
+            setTimeout(() => i.remove(), 1500)
+        }
+    }
+
+
+    const copyToClipboard = (e: React.MouseEvent): void => {
+        iconAction(() => {
+            const prompt: string = elements.map(x => x.value).join('')
+            window.navigator.clipboard.writeText(`PS1=$'${prompt}'`)
+
+        }, e, 'rgb(109, 160, 255)', 'Copied ✅')
+    }
+
+    const clearPrompt = (e: React.MouseEvent): void => {
+        iconAction(() => {
+            setElements([])
+
+        }, e, 'rgb(250, 57, 57)')
     }
 
 
     return (
         <section className="output-panel">
 
-            <p className="title">output (copy to ~/.zshrc)</p>
+            <p className="title">output</p>
 
-            <div>
+            <div className='container'>
 
                 <p className='out'>
-                    PS1=$'{``}'
+                    PS1=$'{`${elements.map(x => x.value).join('')}`}'
                 </p>
 
-                <Icon clickFn={copyToClipboard} icon={<FaRegClipboard/>} />
+                <div>
+
+                    <Icon clickFn={clearPrompt} icon={<FaRegTrashAlt/>} />
+                    <Icon clickFn={copyToClipboard} icon={<FaRegClipboard/>} />
+
+                </div>
 
             </div>
 

@@ -3,8 +3,13 @@ import { ICurrentElement } from "@/interfaces/ShellInterfaces";
 import { FaTimes } from "react-icons/fa";
 
 
-const ElementsOption = ({ text, setElements, elementID }: ICurrentElement) => {
+const ElementsOption = ({ text, setElements, elementID, setHighlighted, highlighted }: ICurrentElement) => {
+    const isHighlighted: boolean = elementID === highlighted
+
     const deleteElement = (): void => {
+        if (isHighlighted)
+            setHighlighted(null)
+
         setElements(curr => {
             const i: number = curr.findIndex(x => x.id === elementID) 
 
@@ -15,12 +20,20 @@ const ElementsOption = ({ text, setElements, elementID }: ICurrentElement) => {
         })
     }
 
+    const highlightOption = (e: React.MouseEvent): void => {
+        const t: HTMLElement = e.target! as HTMLElement
+        
+        if (t.className !== 'del-icon')
+            setHighlighted(elementID)
+    }
+
 
     return (
-        <div className="current-option">
+        <div onClick={highlightOption} className={`current-option ${isHighlighted ? 'toggled' : ''}`}>
 
             <p>{text}</p>
             <Icon 
+                cname="del-icon"
                 clickFn={deleteElement}
                 icon={<FaTimes />} 
             />

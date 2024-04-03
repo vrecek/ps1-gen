@@ -18,12 +18,12 @@ section.elements-panel {
 
             &:first-child {
                 left: 0;
-                translate: -110% -50%;
+                translate: -130% -50%;
             }
 
             &:last-child {
                 right: 0;
-                translate: 110% -50%;
+                translate: 130% -50%;
             }
         }
 
@@ -40,10 +40,16 @@ section.elements-panel {
                 margin-right: .5em;
                 cursor: pointer;
                 flex-shrink: 0;
-    
+                border-bottom: 2px solid transparent;
+
+                &.toggled{
+                    border-color: royalblue;
+                }
+ 
                 p {
                     font-size: .85rem;
                     font-weight: 500;
+                    pointer-events: none;
                 }
     
                 span {
@@ -53,6 +59,7 @@ section.elements-panel {
     
                     svg {
                         @include FullSize;
+                        pointer-events: none;
                     }
     
                     &:hover {

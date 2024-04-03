@@ -1,11 +1,12 @@
 import '@/css/AddPanel.css'
-import { IElementsStateFn, IPanelOption } from '@/interfaces/ShellInterfaces'
+import { IAddPanel, IPanelOption } from '@/interfaces/ShellInterfaces'
 import CustomText from './CustomText'
 import OptionsPanel from '../OptionsPanel/OptionsPanel'
 import React from 'react'
+import generateID from '@/utils/generateID'
 
 
-const AddPanel = ({ setElements }: IElementsStateFn) => {
+const AddPanel = ({ setElements, highlighted }: IAddPanel) => {
     const options: IPanelOption[] = [
         { text: 'Hostname', value: '%m' },
         { text: 'Username', value: '%n' },
@@ -15,15 +16,20 @@ const AddPanel = ({ setElements }: IElementsStateFn) => {
         { text: 'AM/PM time', value: '%t' },
         { text: 'YY-MM-DD', value: '%D' },
         { text: 'DD-MM-YY', value: '%D{%d-%m-%Y}' },
-    ].map(x => { return {...x, id: Math.random().toString(16).slice(2) } })
+    ]
 
     const addElement = (e: React.MouseEvent, type: IPanelOption): void => {
         const t: HTMLElement = e.currentTarget! as HTMLElement
+
         t.style.scale = '.9'
         setTimeout(() => t.style.scale = '1', 100)
 
         setElements(curr => {
-            curr.push({...type})
+            curr.push({
+                ...type, 
+                id: generateID()
+            })
+
             return [...curr]
         }) 
     }
@@ -46,9 +52,12 @@ const AddPanel = ({ setElements }: IElementsStateFn) => {
 
             </div>
 
-            <CustomText />
+            <CustomText setElements={setElements} />
 
-            <OptionsPanel />
+            <OptionsPanel 
+                highlighted={highlighted}
+                setElements={setElements}
+            />
 
         </aside>
     )

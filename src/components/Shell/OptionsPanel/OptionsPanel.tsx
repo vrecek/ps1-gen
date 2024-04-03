@@ -1,10 +1,10 @@
 import '@/css/OptionsPanel.css'
 import { IoIosColorPalette } from "react-icons/io"
 import OptionElement from './OptionElement'
-import { IOptionElement } from '@/interfaces/ShellInterfaces'
+import { IAddPanel, IOptionElement } from '@/interfaces/ShellInterfaces'
 
 
-const OptionsPanel = () => {
+const OptionsPanel = ({ highlighted, setElements }: IAddPanel) => {
     const options: IOptionElement[] = [
         { text: 'Foreground', icon: <IoIosColorPalette />, clickFn: ()=>{} },
         { text: 'Background', icon: <IoIosColorPalette />, clickFn: ()=>{} },
@@ -21,6 +21,7 @@ const OptionsPanel = () => {
                 {
                     options.map((x, i) => (
                         <OptionElement
+                            cname={highlighted ? '' : 'disabled'}
                             key={i}
                             text={x.text}
                             icon={x.icon}

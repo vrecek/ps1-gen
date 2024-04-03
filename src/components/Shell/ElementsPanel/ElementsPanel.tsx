@@ -5,11 +5,11 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa"
 import ElementsArrow from './ElementsArrow'
 
 
-const ElementsPanel = ({ elements, setElements }: IElementsPanel) => {
+const ElementsPanel = ({ elements, setElements, setHighlighted, highlighted }: IElementsPanel) => {
     return (
         <section className="elements-panel">
 
-            <p className="title">Elements</p>
+            <p className="title">Elements ({elements.length})</p>
 
             <div className='wrap'>
 
@@ -21,6 +21,8 @@ const ElementsPanel = ({ elements, setElements }: IElementsPanel) => {
                             <CurrentElement 
                                 key={i}
                                 setElements={setElements}
+                                setHighlighted={setHighlighted}
+                                highlighted={highlighted}
                                 text={x.text}
                                 elementID={x.id}
                             />
