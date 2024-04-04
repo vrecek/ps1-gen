@@ -3,10 +3,12 @@ export type IPanelOption = {
     value: string
 }
 
-export type ICurrentElement = IElementsStateFn & IHighlightedState & {
+export type ICurrentElement = IElementsStateFn & IHighlightedState & IToggledStateFn & {
     text:      string
     elementID: string
 }
+
+export type IOutputPanel = IElementsState & IHighlightedStateFn & IToggledStateFn
 
 export type IOptionElement = {
     cname?:  string
@@ -16,9 +18,10 @@ export type IOptionElement = {
 }
 
 export type IElementState = {
-    text:  string
-    value: string
-    id: string
+    text:          string
+    value:         string
+    originalValue: string
+    id:            string
 }
 
 export type IElementsStateFn = {
@@ -37,12 +40,26 @@ export type IHighlightedStateObj = {
 
 export type IElementsState = IElementsStateFn & IElementsStateObj
 export type IHighlightedState = IHighlightedStateFn & IHighlightedStateObj
+export type IToggledState = IToggledStateFn & IToggledStateObj
 
 export type IElementsArrow = {
     icon: JSX.Element
     type: 'left' | 'right'
 }
 
-export type IElementsPanel = IElementsState & IHighlightedState
+export type IElementsPanel = IElementsState & IHighlightedState & IToggledStateFn
 
-export type IAddPanel = IElementsStateFn & IHighlightedStateObj
+export type IAddPanel = IElementsStateFn & IToggledState & IHighlightedStateObj
+
+export type IToggledOptions = 'foreground' | 'background' | null
+export type IToggledStateFn = {
+    setToggled: React.Dispatch<React.SetStateAction<IToggledOptions>>
+}
+export type IToggledStateObj = {
+    toggled: IToggledOptions
+}
+
+export type IColorChange = IToggledStateFn & {
+    header: string
+    saveFn: (hexColor: string) => void
+}

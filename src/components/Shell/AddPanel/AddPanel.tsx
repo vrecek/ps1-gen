@@ -6,7 +6,7 @@ import React from 'react'
 import generateID from '@/utils/generateID'
 
 
-const AddPanel = ({ setElements, highlighted }: IAddPanel) => {
+const AddPanel = ({ setElements, highlighted, setToggled, toggled }: IAddPanel) => {
     const options: IPanelOption[] = [
         { text: 'Hostname', value: '%m' },
         { text: 'Username', value: '%n' },
@@ -27,6 +27,7 @@ const AddPanel = ({ setElements, highlighted }: IAddPanel) => {
         setElements(curr => {
             curr.push({
                 ...type, 
+                originalValue: type.value,
                 id: generateID()
             })
 
@@ -57,6 +58,8 @@ const AddPanel = ({ setElements, highlighted }: IAddPanel) => {
             <OptionsPanel 
                 highlighted={highlighted}
                 setElements={setElements}
+                setToggled={setToggled}
+                toggled={toggled}
             />
 
         </aside>

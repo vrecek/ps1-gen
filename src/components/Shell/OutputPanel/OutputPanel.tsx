@@ -1,10 +1,10 @@
 import Icon from '@/components/Common/Icon';
 import '@/css/OutputPanel.css'
-import { IElementsState } from '@/interfaces/ShellInterfaces';
+import { IOutputPanel } from '@/interfaces/ShellInterfaces';
 import { FaRegClipboard, FaRegTrashAlt } from "react-icons/fa";
 
 
-const OutputPanel = ({ elements, setElements }: IElementsState) => {
+const OutputPanel = ({ elements, setElements, setHighlighted, setToggled }: IOutputPanel) => {
     const iconAction = (fn: () => void, e: React.MouseEvent, clickColor: string, iText?: string): void => {
         const t:      HTMLElement = e.currentTarget! as HTMLElement,
               svg:    HTMLElement = [...t.children][0] as HTMLElement
@@ -40,6 +40,8 @@ const OutputPanel = ({ elements, setElements }: IElementsState) => {
     const clearPrompt = (e: React.MouseEvent): void => {
         iconAction(() => {
             setElements([])
+            setHighlighted(null)
+            setToggled(null)
 
         }, e, 'rgb(250, 57, 57)')
     }

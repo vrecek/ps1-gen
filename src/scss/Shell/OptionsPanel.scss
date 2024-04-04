@@ -7,6 +7,48 @@ section.options-panel {
     div.wrap {
         display: flex;
         flex-wrap: wrap;
+        position: relative;
+
+        section.opt {
+            position: absolute;
+            background: $clr-blackl;
+            border-radius: .25em;
+            padding: 1em 2em;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+
+            div {
+                margin-top: 1em;
+                @include Flex(sb, c);
+
+                button {
+                    padding: .75em 2em;
+                    border-radius: .15em;
+                    outline: 0;
+                    border: 0;
+                    cursor: pointer;
+                    color: $clr-whitel;
+    
+                    &.close-btn {
+                        background: $clr-red;                        
+                    }
+
+                    &.save-btn {
+                        background: $clr-greend;
+                        margin-right: 1em;
+                    }
+                }
+            }
+
+            h6 {
+                font-size: .9rem;
+                margin-bottom: 1em;
+                font-family: 'Roboto Mono';
+                border-bottom: 2px solid $clr-greend;
+                padding-bottom: .1em;
+            }
+        }
 
         div.option {
             border-radius: .5em;

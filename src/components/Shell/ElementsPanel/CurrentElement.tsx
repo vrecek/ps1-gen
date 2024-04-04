@@ -3,12 +3,14 @@ import { ICurrentElement } from "@/interfaces/ShellInterfaces";
 import { FaTimes } from "react-icons/fa";
 
 
-const ElementsOption = ({ text, setElements, elementID, setHighlighted, highlighted }: ICurrentElement) => {
+const ElementsOption = ({ text, setElements, elementID, setHighlighted, highlighted, setToggled }: ICurrentElement) => {
     const isHighlighted: boolean = elementID === highlighted
 
     const deleteElement = (): void => {
-        if (isHighlighted)
+        if (isHighlighted) {
             setHighlighted(null)
+            setToggled(null)
+        }
 
         setElements(curr => {
             const i: number = curr.findIndex(x => x.id === elementID) 

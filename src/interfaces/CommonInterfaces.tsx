@@ -9,3 +9,9 @@ export type IIcon = {
     cname   ?: string
     clickFn ?: (e: React.MouseEvent) => void
 }
+
+export type IButton = {
+    txt:      string
+    cname?:   string
+    clickFn?: (e: React.MouseEvent) => void
+}

@@ -18,6 +18,7 @@ const CustomText = ({ setElements }: IElementsStateFn) => {
             curr.push({
                 id: generateID(),
                 text: val,
+                originalValue: val,
                 value: val
             })
             return [...curr]
