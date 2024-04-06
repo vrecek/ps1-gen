@@ -1,3 +1,8 @@
+export type IShellPage = {
+    shell: Shells
+}
+export type Shells = 'zsh' | 'bash'
+
 export type IPanelOption = {
     text:  string
     value: string
@@ -8,7 +13,7 @@ export type ICurrentElement = IElementsStateFn & IHighlightedState & IToggledSta
     elementID: string
 }
 
-export type IOutputPanel = IElementsState & IHighlightedStateFn & IToggledStateFn
+export type IOutputPanel = IElementsState & IHighlightedStateFn & IToggledStateFn & IShellPage
 
 export type IOptionElement = {
     cname?:  string
@@ -49,7 +54,7 @@ export type IElementsArrow = {
 
 export type IElementsPanel = IElementsState & IHighlightedState & IToggledStateFn
 
-export type IAddPanel = IElementsStateFn & IToggledState & IHighlightedStateObj
+export type IAddPanel = IElementsStateFn & IToggledState & IHighlightedStateObj & IShellPage
 
 export type IToggledOptions = 'foreground' | 'background' | null
 export type IToggledStateFn = {
@@ -63,3 +68,5 @@ export type IColorChange = IToggledStateFn & {
     header: string
     saveFn: (hexColor: string) => void
 }
+
+export type ShellInfo = [string, string, string, string]

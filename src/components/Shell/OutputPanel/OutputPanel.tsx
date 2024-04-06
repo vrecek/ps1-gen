@@ -4,7 +4,9 @@ import { IOutputPanel } from '@/interfaces/ShellInterfaces';
 import { FaRegClipboard, FaRegTrashAlt } from "react-icons/fa";
 
 
-const OutputPanel = ({ elements, setElements, setHighlighted, setToggled }: IOutputPanel) => {
+const OutputPanel = ({ elements, setElements, setHighlighted, setToggled, shell }: IOutputPanel) => {
+    const PSout: string = shell === 'zsh' ? "PS1=$'" : "PS1='"
+
     const iconAction = (fn: () => void, e: React.MouseEvent, clickColor: string, iText?: string): void => {
         const t:      HTMLElement = e.currentTarget! as HTMLElement,
               svg:    HTMLElement = [...t.children][0] as HTMLElement
@@ -32,7 +34,7 @@ const OutputPanel = ({ elements, setElements, setHighlighted, setToggled }: IOut
     const copyToClipboard = (e: React.MouseEvent): void => {
         iconAction(() => {
             const prompt: string = elements.map(x => x.value).join('')
-            window.navigator.clipboard.writeText(`PS1=$'${prompt}'`)
+            window.navigator.clipboard.writeText(`${PSout}${prompt}'`)
 
         }, e, 'rgb(109, 160, 255)', 'Copied ✅')
     }
@@ -55,7 +57,7 @@ const OutputPanel = ({ elements, setElements, setHighlighted, setToggled }: IOut
             <div className='container'>
 
                 <p className='out'>
-                    PS1=$'{`${elements.map(x => x.value).join('')}`}'
+                    {PSout}{`${elements.map(x => x.value).join('')}`}'
                 </p>
 
                 <div>

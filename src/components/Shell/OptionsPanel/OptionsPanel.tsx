@@ -1,48 +1,65 @@
 import '@/css/OptionsPanel.css'
 import { IoIosColorPalette } from "react-icons/io"
 import OptionElement from './OptionElement'
-import { IAddPanel, IElementState, IOptionElement } from '@/interfaces/ShellInterfaces'
+import { IAddPanel, IElementState, IOptionElement, ShellInfo } from '@/interfaces/ShellInterfaces'
 import ColorChange from './Options/ColorChange'
+import React from 'react'
 
 
-const OptionsPanel = ({ highlighted, setElements, setToggled, toggled }: IAddPanel) => {
+const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: IAddPanel) => {
+    const [prevColor, setPrevColor] = React.useState<string>('')
     const options: IOptionElement[] = [
         { text: 'Foreground', icon: <IoIosColorPalette />, clickFn: () => setToggled('foreground') },
         { text: 'Background', icon: <IoIosColorPalette />, clickFn: () => setToggled('background') },
     ]
 
     const renderOptionMenu = (): JSX.Element => {
-        const colorFn = (hexColor: string, type: 'f' | 'k'): void => {
-            const curr: HTMLElement = document.querySelector('section.elements-panel div.current-option.toggled')!
-            
+        const colorFn = (hexColor: string, type: 'f' | 'b'): void => {
+            const curr:     HTMLElement = document.querySelector('section.elements-panel div.current-option.toggled')!,
+                  hexToRgb: string = `${hexColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(';')}m`
+
+            let zshCode:    ShellInfo,
+                bashCode:   ShellInfo
+
+
             if (type === 'f')
+            {
                 (curr.children[0] as HTMLElement).style.color = hexColor
-            else if (type === 'k')
+                zshCode = [`%F{${hexColor}}`, '%F{', '%f', hexColor]
+                bashCode = [`\\e[38;2;${hexToRgb}`, '\\e[38;2;', '\\e[0m', hexToRgb]
+            }
+            else
+            {
                 curr.style.background = hexColor
+                zshCode = [`%K{${hexColor}}`, '%K{', '%k', hexColor]
+                bashCode = [`\\e[48;2;${hexToRgb}`, '\\e[48;2;', '\\e[0m' , hexToRgb]
+            }
+
+            const shCode: ShellInfo = shell === 'zsh' ? zshCode : bashCode,
+                  [code_v, init_v, end_v, clr_v] = shCode
 
             setElements(curr => {
-                const element:   IElementState = curr.filter(x => x.id === highlighted)[0],
-                      typeUpper: string = type.toUpperCase(),
-                      {value, originalValue} = element
+                const element:  IElementState = curr.filter(x => x.id === highlighted)[0],
+                      value:    string = element.value,
+                      modIndex: number = value.indexOf(init_v)
 
-                let newValue:    string = `%${typeUpper}{${hexColor}}${originalValue}%${type}`
+                let   newValue: string
 
-                if (value.includes(`%${typeUpper}`)) {
-                    const i: number = value.indexOf(`%${typeUpper}`)
-                    newValue = `${value.slice(0, i + 3)}${hexColor}${value.slice(i + 10)}`
+                if (modIndex !== -1)
+                {
+                    const i_start: number = modIndex + init_v.length
+                    newValue = `${value.slice(0, i_start)}${clr_v}${value.slice(i_start + prevColor.length)}`
                 }
-                else if (
-                    type === 'f' && value.includes('%K') ||
-                    type === 'k' && value.includes('%F')
-                ) {
-                    newValue = newValue.replace(originalValue, value)
-                }
+                else
+                    newValue = `${code_v}${value}${end_v}`
+
 
                 element.value = newValue
 
                 return [...curr]
             })
 
+            setPrevColor(clr_v)
             setToggled(null)
         }
 
@@ -56,7 +73,7 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled }: IAddPan
 
             case 'background':
                 return  <ColorChange 
-                            saveFn={(hex: string) => colorFn(hex, 'k')} 
+                            saveFn={(hex: string) => colorFn(hex, 'b')} 
                             header='Background change' 
                             setToggled={setToggled} 
                         />

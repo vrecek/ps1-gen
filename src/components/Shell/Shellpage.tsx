@@ -2,15 +2,21 @@ import '@/css/Shellpage.css'
 import AddPanel from './AddPanel/AddPanel'
 import ElementsPanel from './ElementsPanel/ElementsPanel'
 import OutputPanel from './OutputPanel/OutputPanel'
-import { IElementState, IToggledOptions } from '@/interfaces/ShellInterfaces'
+import { IElementState, IShellPage, IToggledOptions } from '@/interfaces/ShellInterfaces'
 import React from 'react'
 
 
-const Shellpage = () => {
-    const SHELL: string = window.location.pathname.slice(1)
+const Shellpage = ({ shell }: IShellPage) => {
     const [elements, setElements] = React.useState<IElementState[]>([])
     const [highlighted, setHighlighted] = React.useState<string | null>(null)
     const [optionToggled, setToggled] = React.useState<IToggledOptions>(null)
+
+    React.useEffect(() => {
+        setElements([])
+        setHighlighted(null)
+        setToggled(null)
+
+    }, [window.location.pathname])
 
     const unHighlight = (e: React.MouseEvent): void => {
         if (highlighted && (e.target as Element).className === 'main-wrap') {
@@ -23,11 +29,12 @@ const Shellpage = () => {
     return (
         <main onClick={unHighlight} className="shellpage">
 
-            <h1>{SHELL}</h1>
+            <h1>{shell}</h1>
 
             <div className='main-wrap'>
 
                 <AddPanel 
+                    shell={shell}
                     setElements={setElements}
                     highlighted={highlighted}
                     toggled={optionToggled}
@@ -44,6 +51,7 @@ const Shellpage = () => {
                         setToggled={setToggled}
                     />
                     <OutputPanel 
+                        shell={shell}
                         elements={elements}
                         setElements={setElements}
                         setHighlighted={setHighlighted}

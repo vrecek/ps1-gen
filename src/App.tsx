@@ -19,8 +19,8 @@ function App() {
                 <Routes>
 
                     <Route path='/' element={<Homepage />} />
-                    <Route path='/bash' element={<Shellpage />} />
-                    <Route path='/zsh' element={<Shellpage />} />
+                    <Route path='/bash' element={<Shellpage shell='bash' />} />
+                    <Route path='/zsh' element={<Shellpage shell='zsh' />} />
 
                 </Routes>
 

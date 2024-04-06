@@ -15,3 +15,7 @@ export type IButton = {
     cname?:   string
     clickFn?: (e: React.MouseEvent) => void
 }
+
+export type Object = {
+    [key: string]: string
+}

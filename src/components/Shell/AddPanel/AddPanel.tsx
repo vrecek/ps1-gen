@@ -4,19 +4,11 @@ import CustomText from './CustomText'
 import OptionsPanel from '../OptionsPanel/OptionsPanel'
 import React from 'react'
 import generateID from '@/utils/generateID'
+import shellInsertValues from '@/data/shell_init'
 
 
-const AddPanel = ({ setElements, highlighted, setToggled, toggled }: IAddPanel) => {
-    const options: IPanelOption[] = [
-        { text: 'Hostname', value: '%m' },
-        { text: 'Username', value: '%n' },
-        { text: 'Current Path', value: '%~' },
-        { text: 'Full path', value: '%/' },
-        { text: '24 hour time', value: '%T' },
-        { text: 'AM/PM time', value: '%t' },
-        { text: 'YY-MM-DD', value: '%D' },
-        { text: 'DD-MM-YY', value: '%D{%d-%m-%Y}' },
-    ]
+const AddPanel = ({ setElements, highlighted, setToggled, toggled, shell }: IAddPanel) => {
+    const options: IPanelOption[] = shellInsertValues(shell)
 
     const addElement = (e: React.MouseEvent, type: IPanelOption): void => {
         const t: HTMLElement = e.currentTarget! as HTMLElement
@@ -60,6 +52,7 @@ const AddPanel = ({ setElements, highlighted, setToggled, toggled }: IAddPanel) 
                 setElements={setElements}
                 setToggled={setToggled}
                 toggled={toggled}
+                shell={shell}
             />
 
         </aside>
