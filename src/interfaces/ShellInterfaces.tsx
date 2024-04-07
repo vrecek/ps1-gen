@@ -4,8 +4,9 @@ export type IShellPage = {
 export type Shells = 'zsh' | 'bash'
 
 export type IPanelOption = {
-    text:  string
-    value: string
+    text:    string
+    prvText: string
+    value:   string
 }
 
 export type ICurrentElement = IElementsStateFn & IHighlightedState & IToggledStateFn & {
@@ -27,6 +28,7 @@ export type IElementState = {
     value:         string
     originalValue: string
     id:            string
+    prvText:       string
 }
 
 export type IElementsStateFn = {
@@ -70,3 +72,5 @@ export type IColorChange = IToggledStateFn & {
 }
 
 export type ShellInfo = [string, string, string, string]
+
+export type IShellPreview = IElementsStateObj & IShellPage

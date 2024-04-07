@@ -2,26 +2,34 @@ import { IPanelOption, Shells } from "@/interfaces/ShellInterfaces";
 
 
 export default (shell: Shells): IPanelOption[] => {
-    if (shell === 'zsh')
-        return [
-            { text: 'Hostname', value: '%m' },
-            { text: 'Username', value: '%n' },
-            { text: 'Current Path', value: '%~' },
-            { text: 'Full path', value: '%/' },
-            { text: '24 hour time', value: '%T' },
-            { text: 'AM/PM time', value: '%t' },
-            { text: 'YY-MM-DD', value: '%D' },
-            { text: 'DD-MM-YY', value: '%D{%d-%m-%Y}' },
+    const constValues: string[][] = [
+        [
+            'Hostname', 'Username',
+            'Current path', 'Full path',
+            '24 hour time', 'AM/PM time',
+            'YY-MM-DD', 'DD-MM-YY'
+        ],
+        [
+            'computer', 'user',
+            '~/', '/home/user',
+            '22:17', '10:17PM',
+            '24-04-07', '07-04-2024'
         ]
-
-    return [
-        { text: 'Hostname', value: '\\h' },
-        { text: 'Username', value: '\\u' },
-        { text: 'Current Path', value: '\\w' },
-        { text: 'Full path', value: '$PWD' },
-        { text: '24 hour time', value: '\\A' },
-        { text: 'AM/PM time', value: '\\@' },
-        { text: 'YY-MM-DD', value: '\\D{%Y-%m-%d}' },
-        { text: 'DD-MM-YY', value: '\\D{%d-%m-%Y}' },
     ]
+
+    let codeValues: string[]
+
+    if (shell === 'zsh')
+        codeValues = ['%m', '%n', '%~', '%/', '%T', '%t', '%D', '%D{%d-%m-%Y}']
+    else
+        codeValues = ['\\h', '\\u', '\\w', '$PWD', '\\A', '\\@', '\\D{%Y-%m-%d}', '\\D{%d-%m-%Y}']
+
+
+    return codeValues.map((x, i) => {
+        return {
+            text: constValues[0][i],
+            value: x,
+            prvText: constValues[1][i]
+        }
+    })
 }

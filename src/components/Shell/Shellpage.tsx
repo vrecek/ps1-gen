@@ -4,6 +4,7 @@ import ElementsPanel from './ElementsPanel/ElementsPanel'
 import OutputPanel from './OutputPanel/OutputPanel'
 import { IElementState, IShellPage, IToggledOptions } from '@/interfaces/ShellInterfaces'
 import React from 'react'
+import PreviewPanel from './PreviewPanel/PreviewPanel'
 
 
 const Shellpage = ({ shell }: IShellPage) => {
@@ -56,6 +57,10 @@ const Shellpage = ({ shell }: IShellPage) => {
                         setElements={setElements}
                         setHighlighted={setHighlighted}
                         setToggled={setToggled}
+                    />
+                    <PreviewPanel
+                        elements={elements}
+                        shell={shell}
                     />
 
                 </section>

@@ -20,6 +20,13 @@ main.shellpage {
             margin-bottom: 1em;
         }
 
+        p.out {
+            font-size: .9rem;    
+            color: $clr-whited;
+            font-weight: 500;
+            font-family: 'Roboto Mono';
+        }
+
         section.elem-wrap {
             width: 55%;
 

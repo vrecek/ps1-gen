@@ -19,6 +19,7 @@ const CustomText = ({ setElements }: IElementsStateFn) => {
                 id: generateID(),
                 text: val,
                 originalValue: val,
+                prvText: val,
                 value: val
             })
             return [...curr]
