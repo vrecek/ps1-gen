@@ -2,8 +2,24 @@
 
 
 section.elements-panel {
+    div.entry-wrap {
+        @include Flex(none, fs);
+        
+        div.switch-element {
+            margin-left: 1em;
+            display: flex;
+
+            span {
+                cursor: pointer;
+                font-size: 1.2rem;
+                display: block;
+                margin-right: .25em;
+            }
+        }
+    }
+
     div.wrap {
-        margin: 1em 0 2em 0;
+        margin: .5em 0 2em 0;
         position: relative;
 
         span.element-arrow {
@@ -16,12 +32,12 @@ section.elements-panel {
                 @include FullSize;
             }
 
-            &:first-child {
+            &:first-of-type {
                 left: 0;
                 translate: -130% -50%;
             }
 
-            &:last-child {
+            &:last-of-type {
                 right: 0;
                 translate: 130% -50%;
             }
@@ -56,6 +72,7 @@ section.elements-panel {
                     @include FullSize(20px);
                     margin-left: .5em;
                     transition: .25s;
+                    color: $clr-whitel;
     
                     svg {
                         @include FullSize;

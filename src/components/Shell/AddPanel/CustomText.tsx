@@ -20,7 +20,9 @@ const CustomText = ({ setElements }: IElementsStateFn) => {
                 text: val,
                 originalValue: val,
                 prvText: val,
-                value: val
+                value: val,
+                background: '',
+                foreground: ''
             })
             return [...curr]
         })

@@ -3,7 +3,10 @@ import { ICurrentElement } from "@/interfaces/ShellInterfaces";
 import { FaTimes } from "react-icons/fa";
 
 
-const ElementsOption = ({ text, setElements, elementID, setHighlighted, highlighted, setToggled }: ICurrentElement) => {
+const ElementsOption = ({
+    text, setElements, elementID, setHighlighted, highlighted, setToggled, bg, fg
+}: ICurrentElement) => {
+
     const isHighlighted: boolean = elementID === highlighted
 
     const deleteElement = (): void => {
@@ -31,7 +34,11 @@ const ElementsOption = ({ text, setElements, elementID, setHighlighted, highligh
 
 
     return (
-        <div onClick={highlightOption} className={`current-option ${isHighlighted ? 'toggled' : ''}`}>
+        <div 
+            onClick={highlightOption} 
+            className={`current-option ${isHighlighted ? 'toggled' : ''}`}
+            style={{color: fg, background: bg}}
+        >
 
             <p>{text}</p>
             <Icon 

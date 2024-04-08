@@ -35,9 +35,12 @@ const PreviewPanel = ({ elements, shell }: IShellPreview) => {
                             fg_bg[i] = hexClr
                         }
                     }
+ 
 
                     return <span key={x.id} style={{color: fg_bg[0], background: fg_bg[1]}}>
-                        {x.prvText}
+                        {
+                            x.prvText.replaceAll('\\n', '\n')
+                        }
                     </span>
                 })
             }

@@ -20,7 +20,9 @@ const AddPanel = ({ setElements, highlighted, setToggled, toggled, shell }: IAdd
             curr.push({
                 ...type, 
                 originalValue: type.value,
-                id: generateID()
+                id: generateID(),
+                background: '',
+                foreground: ''
             })
 
             return [...curr]

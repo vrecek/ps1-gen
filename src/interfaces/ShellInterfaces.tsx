@@ -12,6 +12,8 @@ export type IPanelOption = {
 export type ICurrentElement = IElementsStateFn & IHighlightedState & IToggledStateFn & {
     text:      string
     elementID: string
+    fg:        string
+    bg:        string
 }
 
 export type IOutputPanel = IElementsState & IHighlightedStateFn & IToggledStateFn & IShellPage
@@ -29,6 +31,8 @@ export type IElementState = {
     originalValue: string
     id:            string
     prvText:       string
+    foreground:    string
+    background:    string
 }
 
 export type IElementsStateFn = {
@@ -74,3 +78,9 @@ export type IColorChange = IToggledStateFn & {
 export type ShellInfo = [string, string, string, string]
 
 export type IShellPreview = IElementsStateObj & IShellPage
+
+export type ISwitchElements = IHighlightedStateObj & IElementsStateFn
+export enum ESwitch {
+    RIGHT = 1,
+    LEFT = -1
+}

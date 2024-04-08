@@ -15,29 +15,28 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: 
 
     const renderOptionMenu = (): JSX.Element => {
         const colorFn = (hexColor: string, type: 'f' | 'b'): void => {
-            const curr:     HTMLElement = document.querySelector('section.elements-panel div.current-option.toggled')!,
-                  hexToRgb: string = `${hexColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(';')}m`
-
-            let zshCode:    ShellInfo,
-                bashCode:   ShellInfo
+            const hexToRgb: string = `${hexColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(';')}m`
+            let newFG:      string,
+                newBG:      string,
+                bashCode:   ShellInfo,
+                zshCode:    ShellInfo
 
 
             if (type === 'f')
             {
-                (curr.children[0] as HTMLElement).style.color = hexColor
+                newFG = hexColor
                 zshCode = [`%F{${hexColor}}`, '%F{', '%f', hexColor]
                 bashCode = [`\\e[38;2;${hexToRgb}`, '\\e[38;2;', '\\e[0m', hexToRgb]
             }
             else
             {
-                curr.style.background = hexColor
+                newBG = hexColor
                 zshCode = [`%K{${hexColor}}`, '%K{', '%k', hexColor]
                 bashCode = [`\\e[48;2;${hexToRgb}`, '\\e[48;2;', '\\e[0m' , hexToRgb]
             }
 
-            const shCode: ShellInfo = shell === 'zsh' ? zshCode : bashCode,
-                  [code_v, init_v, end_v, clr_v] = shCode
-
+            const [code_v, init_v, end_v, clr_v] = shell === 'zsh' ? zshCode : bashCode
+            
             setElements(curr => {
                 const element:  IElementState = curr.filter(x => x.id === highlighted)[0],
                       value:    string = element.value,
@@ -54,6 +53,8 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: 
                     newValue = `${code_v}${value}${end_v}`
 
 
+                newBG && (element.background = newBG)
+                newFG && (element.foreground = newFG)
                 element.value = newValue
 
                 return [...curr]
