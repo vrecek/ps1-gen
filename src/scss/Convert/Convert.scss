@@ -1,0 +1,108 @@
+@import '../config';
+
+
+main.convert-page {
+    padding: 3em 4em 0 4em;
+    
+    section.convert-section {
+        margin-bottom: 5em;
+
+        p.entry-para {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 1em;
+        }
+
+        p.type {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-family: 'Roboto Mono';
+            margin-bottom: .25em;
+            font-size: .95rem;
+            color: $clr-whitel;
+        }
+
+        input {
+            background: $clr-blackl;
+            font-size: .9rem;
+            outline: 0;
+            border: 0;
+            border-radius: .15em;
+            padding: 1em;
+            width: 60%;
+            color: $clr-whited;
+        }
+
+        section.convert-output {
+            div {
+                @include Flex(none, c);
+                position: relative;
+
+                span {
+                    @include FullSize(30px);
+                    cursor: pointer;
+                    margin-left: .5em;
+                    position: relative;
+        
+                    i {
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        translate: -50% -150%;
+                        white-space: nowrap;
+                        font-weight: 800;
+                    }
+        
+                    svg {
+                        @include FullSize;
+                        transition: .2s;
+                    }
+                }
+            }
+        }
+
+        section.convert-input {
+            button {
+                display: block;
+                color: $clr-whitel;
+                background: $clr-blued;
+                border-radius: .15em;
+                padding: .75em 1.5em;
+                font-size: .95rem;
+                cursor: pointer;
+                margin: 1em 0;
+                border: 0;
+                transition: .25s;
+
+                &:hover {
+                    background: darken($clr-blued, 5%);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 3em 1em 0 1em;
+
+        section.convert-section {
+            input {
+                width: 100%;
+
+                &.output-i {
+                    padding-right: 4em;
+                }
+            }
+
+            section.convert-output {
+                div {
+                    span {
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        translate: -50% -50%;
+                    }
+                }
+            }
+        }
+    }
+}

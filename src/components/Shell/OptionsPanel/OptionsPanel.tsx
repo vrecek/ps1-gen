@@ -14,6 +14,9 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: 
     ]
 
     const renderOptionMenu = (): JSX.Element => {
+        if (!highlighted)
+            return <></>
+
         const colorFn = (hexColor: string, type: 'f' | 'b'): void => {
             const hexToRgb: string = `${hexColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(';')}m`
             let newFG:      string,

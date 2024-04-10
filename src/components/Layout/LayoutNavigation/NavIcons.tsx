@@ -1,6 +1,7 @@
 import Icon from "@/components/Common/Icon"
 import { INavbarLinks } from "@/interfaces/LayoutInterfaces"
 import { GoHomeFill } from "react-icons/go"
+import { HiOutlineSwitchHorizontal } from "react-icons/hi"
 import { SiZsh, SiGnubash } from "react-icons/si"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 
@@ -10,6 +11,7 @@ const NavIcons = () => {
     const icons: INavbarLinks[] = [
 
         { icon: <SiZsh />, url: '/zsh' },
+        { icon: <HiOutlineSwitchHorizontal />, url: '/convert' },
         { icon: <SiGnubash />, url: '/bash' },
         { icon: <GoHomeFill />, url: '/', cname: 'home' }
         

@@ -3,6 +3,8 @@
 
 aside.add-panel {
     width: 28%;
+    min-width: 325px;
+    margin-bottom: 1em;
 
     div.custom-text {
         p {
@@ -52,5 +54,10 @@ aside.add-panel {
             font-size: .9rem;
             font-weight: 600;
         }
+    }
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        margin-top: 3em;
     }
 }

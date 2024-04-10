@@ -3,12 +3,11 @@
 
 header.home-header {
     @include Flex(sa, c);
-    padding: 4em;
+    padding: 4em 2em;
     height: calc(100vh - $navHeight);
 
     section.image-container {
         width: 40%;
-        margin-right: 4em;
 
         div.ln {
             width: 50%;
@@ -80,14 +79,14 @@ header.home-header {
                     }
 
                     p {
-                        margin-left: .75em;
+                        margin-left: .5em;
                         font-family: 'Roboto Mono';
-                        font-size: 1.25rem;
+                        font-size: 1.1rem;
                         letter-spacing: -1px;
                     }
 
                     span {
-                        @include FullSize(60px);
+                        @include FullSize(50px);
 
                         svg {
                             @include FullSize;
@@ -104,7 +103,7 @@ header.home-header {
 
             &.text-section {
                 h1 {
-                    font-size: 3.5rem;
+                    @include Clamp(2.25, 8, 3.5);
                     font-weight: 800;
                     margin-bottom: .5em;
                 }
@@ -112,6 +111,46 @@ header.home-header {
                 p {
                     font-family: 'Roboto Mono';
                     color: $clr-whited;
+                    @include Clamp(.85, 4, 1);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1000px) {
+        section.image-container {
+            display: none;
+        }
+
+        article {
+            width: 100%;            
+            text-align: center;
+
+            section {
+                &.select-section {
+                    justify-content: center;
+
+                    div {
+                        margin: 0 .25em;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        article {
+            section {
+                &.select-section {
+                    flex-direction: column;
+                    margin-top: 2em;
+
+                    div {
+                        &::before,
+                        &::after {
+                            display: none;
+                        }
+                    }
                 }
             }
         }

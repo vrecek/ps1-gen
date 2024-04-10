@@ -8,7 +8,8 @@ section.elements-panel {
         div.switch-element {
             margin-left: 1em;
             display: flex;
-
+            user-select: none;
+            
             span {
                 cursor: pointer;
                 font-size: 1.2rem;
@@ -40,6 +41,20 @@ section.elements-panel {
             &:last-of-type {
                 right: 0;
                 translate: 130% -50%;
+            }
+
+            @media (max-width: 480px) {
+                top: 0;
+                
+                &:first-of-type {
+                    right: 0;
+                    left: auto;
+                    translate: -120% -150%;
+                }
+
+                &:last-of-type {
+                    translate: 0 -150%;
+                }
             }
         }
 

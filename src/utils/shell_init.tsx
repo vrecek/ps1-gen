@@ -11,7 +11,7 @@ export default (shell: Shells): IPanelOption[] => {
         ],
         [
             'computer', 'user',
-            '~/', '/home/user',
+            '~', '/home/user',
             '22:17', '10:17PM',
             '24-04-07', '07-04-2024'
         ]

@@ -4,7 +4,7 @@ import CustomText from './CustomText'
 import OptionsPanel from '../OptionsPanel/OptionsPanel'
 import React from 'react'
 import generateID from '@/utils/generateID'
-import shellInsertValues from '@/data/shell_init'
+import shellInsertValues from '@/utils/shell_init'
 
 
 const AddPanel = ({ setElements, highlighted, setToggled, toggled, shell }: IAddPanel) => {

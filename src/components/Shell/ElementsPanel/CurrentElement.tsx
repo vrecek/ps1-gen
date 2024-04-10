@@ -10,7 +10,8 @@ const ElementsOption = ({
     const isHighlighted: boolean = elementID === highlighted
 
     const deleteElement = (): void => {
-        if (isHighlighted) {
+        if (isHighlighted)
+        {
             setHighlighted(null)
             setToggled(null)
         }

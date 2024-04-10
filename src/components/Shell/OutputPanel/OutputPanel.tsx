@@ -1,19 +1,23 @@
 import Icon from '@/components/Common/Icon';
 import '@/css/OutputPanel.css'
 import { IOutputPanel } from '@/interfaces/ShellInterfaces';
+import copyToClipboard from '@/utils/copyToClipboard';
 import { FaRegClipboard, FaRegTrashAlt } from "react-icons/fa";
 
 
 const OutputPanel = ({ elements, setElements, setHighlighted, setToggled, shell }: IOutputPanel) => {
     const PSout: string = shell === 'zsh' ? "PS1=$'" : "PS1='"
 
-    const iconAction = (fn: () => void, e: React.MouseEvent, clickColor: string, iText?: string): void => {
-        const t:      HTMLElement = e.currentTarget! as HTMLElement,
-              svg:    HTMLElement = [...t.children][0] as HTMLElement
+    const copyToClipboardFn = (e: React.MouseEvent): void => {
+        const prompt: string = elements.map(x => x.value).join('')
+        
+        copyToClipboard(e, `${PSout}${prompt}'`)
+    }
 
-        fn()
+    const clearPrompt = (e: React.MouseEvent): void => {
+        const svg: HTMLElement = [...e.currentTarget!.children][0] as HTMLElement
 
-        svg.style.color = clickColor
+        svg.style.color = 'rgb(250, 57, 57)'
         svg.style.scale = '.85'
 
         setTimeout(() => {
@@ -21,31 +25,9 @@ const OutputPanel = ({ elements, setElements, setHighlighted, setToggled, shell 
             svg.style.scale = '1'
         }, 200)
 
-        if (iText) {
-            const i: HTMLElement = document.createElement('i')
-            i.textContent = iText
-            t.append(i)
-
-            setTimeout(() => i.remove(), 1500)
-        }
-    }
-
-
-    const copyToClipboard = (e: React.MouseEvent): void => {
-        iconAction(() => {
-            const prompt: string = elements.map(x => x.value).join('')
-            window.navigator.clipboard.writeText(`${PSout}${prompt}'`)
-
-        }, e, 'rgb(109, 160, 255)', 'Copied ✅')
-    }
-
-    const clearPrompt = (e: React.MouseEvent): void => {
-        iconAction(() => {
-            setElements([])
-            setHighlighted(null)
-            setToggled(null)
-
-        }, e, 'rgb(250, 57, 57)')
+        setElements([])
+        setHighlighted(null)
+        setToggled(null)
     }
 
 
@@ -63,7 +45,7 @@ const OutputPanel = ({ elements, setElements, setHighlighted, setToggled, shell 
                 <div>
 
                     <Icon clickFn={clearPrompt} icon={<FaRegTrashAlt/>} />
-                    <Icon clickFn={copyToClipboard} icon={<FaRegClipboard/>} />
+                    <Icon clickFn={copyToClipboardFn} icon={<FaRegClipboard/>} />
 
                 </div>
 

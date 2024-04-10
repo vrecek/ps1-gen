@@ -27,6 +27,10 @@ nav.layout-navigation {
                     width: 100%;
                 }
             }
+
+            @media (max-width: 480px) {
+                display: none;
+            }
         }
 
         &.nav-icons,
@@ -42,7 +46,7 @@ nav.layout-navigation {
             }
 
             span.icon {
-                @include FullSize(35px);
+                @include FullSize(clamp(30px, 5vw, 35px));
                 cursor: pointer;
                 transition: .25s;
 
