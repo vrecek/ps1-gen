@@ -4,7 +4,10 @@ import { FaRegClipboard } from "react-icons/fa";
 import { IConvertOutput } from "@/interfaces/ConvertInterfaces";
 
 
-const ConvertOutput = ({ output }: IConvertOutput) => {
+const ConvertOutput = ({ output, base }: IConvertOutput) => {
+    const out: string = 'PS1=' + (base === 'bash' ? '$' : '') + `'${output}'` 
+
+
     return (
         <section className="convert-output">
 
@@ -12,8 +15,8 @@ const ConvertOutput = ({ output }: IConvertOutput) => {
 
             <div>
 
-                <input className="output-i" type="text" value={output} readOnly />
-                <Icon icon={<FaRegClipboard  />} clickFn={(e) => copyToClipboard(e, output)} />
+                <input className="output-i" type="text" value={out} readOnly />
+                <Icon icon={<FaRegClipboard  />} clickFn={(e) => copyToClipboard(e, out)} />
 
             </div>
 

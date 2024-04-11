@@ -16,4 +16,5 @@ export type IConvertInput = SetFn &  {
 
 export type IConvertOutput = {
     output: string
+    base:   Shells
 }

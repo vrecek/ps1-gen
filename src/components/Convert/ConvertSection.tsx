@@ -10,7 +10,7 @@ const ConvertSection = ({ base, setFn, output }: IConvertSection) => {
             <p className="entry-para">{base} ➡️ {base === 'bash' ? 'zsh' : 'bash'}</p>
 
             <ConvertInput setFn={setFn} base={base} />
-            <ConvertOutput output={output} />
+            <ConvertOutput output={output} base={base} />
 
         </section>
     )

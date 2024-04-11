@@ -1,5 +1,8 @@
 import { IPanelOption, Shells } from "@/interfaces/ShellInterfaces";
 
+export const zshCodeValues:  string[] = ['%m', '%n', '%~', '%/', '%T', '%t', '%D', '%D{%d-%m-%Y}']
+export const bashCodeValues: string[] = ['\\h', '\\u', '\\w', '$PWD', '\\A', '\\@', '\\D{%Y-%m-%d}', '\\D{%d-%m-%Y}']
+
 
 export default (shell: Shells): IPanelOption[] => {
     const constValues: string[][] = [
@@ -20,9 +23,9 @@ export default (shell: Shells): IPanelOption[] => {
     let codeValues: string[]
 
     if (shell === 'zsh')
-        codeValues = ['%m', '%n', '%~', '%/', '%T', '%t', '%D', '%D{%d-%m-%Y}']
+        codeValues = zshCodeValues
     else
-        codeValues = ['\\h', '\\u', '\\w', '$PWD', '\\A', '\\@', '\\D{%Y-%m-%d}', '\\D{%d-%m-%Y}']
+        codeValues = bashCodeValues
 
 
     return codeValues.map((x, i) => {
