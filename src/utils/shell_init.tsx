@@ -3,6 +3,8 @@ import { IPanelOption, Shells } from "@/interfaces/ShellInterfaces";
 export const zshCodeValues:  string[] = ['%m', '%n', '%~', '%/', '%T', '%t', '%D', '%D{%d-%m-%Y}']
 export const bashCodeValues: string[] = ['\\h', '\\u', '\\w', '$PWD', '\\A', '\\@', '\\D{%Y-%m-%d}', '\\D{%d-%m-%Y}']
 
+export const extendZshCodeValues:  string[] = [...zshCodeValues, '%~']
+export const extendBashCodeValues: string[] = [...bashCodeValues, '\\W']
 
 export default (shell: Shells): IPanelOption[] => {
     const constValues: string[][] = [

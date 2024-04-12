@@ -4,6 +4,7 @@ import OptionElement from './OptionElement'
 import { IAddPanel, IElementState, IOptionElement, ShellInfo } from '@/interfaces/ShellInterfaces'
 import ColorChange from './Options/ColorChange'
 import React from 'react'
+import hexToRgb from '@/utils/hexToRgb'
 
 
 const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: IAddPanel) => {
@@ -18,7 +19,7 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: 
             return <></>
 
         const colorFn = (hexColor: string, type: 'f' | 'b'): void => {
-            const hexToRgb: string = `${hexColor.slice(1).match(/.{2}/g)!.map(x => parseInt(x, 16)).join(';')}m`
+            const rgb: string = hexToRgb(hexColor)
             let newFG:      string,
                 newBG:      string,
                 bashCode:   ShellInfo,
@@ -29,13 +30,13 @@ const OptionsPanel = ({ highlighted, setElements, setToggled, toggled, shell }: 
             {
                 newFG = hexColor
                 zshCode = [`%F{${hexColor}}`, '%F{', '%f', hexColor]
-                bashCode = [`\\e[38;2;${hexToRgb}`, '\\e[38;2;', '\\e[0m', hexToRgb]
+                bashCode = [`\\e[38;2;${rgb}`, '\\e[38;2;', '\\e[0m', rgb]
             }
             else
             {
                 newBG = hexColor
                 zshCode = [`%K{${hexColor}}`, '%K{', '%k', hexColor]
-                bashCode = [`\\e[48;2;${hexToRgb}`, '\\e[48;2;', '\\e[0m' , hexToRgb]
+                bashCode = [`\\e[48;2;${rgb}`, '\\e[48;2;', '\\e[0m' , rgb]
             }
 
             const [code_v, init_v, end_v, clr_v] = shell === 'zsh' ? zshCode : bashCode
