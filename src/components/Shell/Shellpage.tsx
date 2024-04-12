@@ -17,7 +17,7 @@ const Shellpage = ({ shell }: IShellPage) => {
         setHighlighted(null)
         setToggled(null)
 
-    }, [window.location.pathname])
+    }, [window.location.hash])
 
     const unHighlight = (e: React.MouseEvent): void => {
         if (highlighted && (e.target as Element).className === 'main-wrap') {

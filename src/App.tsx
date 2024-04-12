@@ -1,5 +1,5 @@
 import '@/css/index.css'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {HashRouter, Route, Routes} from 'react-router-dom'
 import Homepage from './components/Home/Homepage'
 import Image from './components/Common/Image'
 import bg from '@/images/bg.png'
@@ -13,7 +13,7 @@ function App() {
         <>
             <Image src={bg} cname='bg-img' />
 
-            <BrowserRouter>
+            <HashRouter>
 
                 <LayoutNavigation />
             
@@ -26,7 +26,7 @@ function App() {
 
                 </Routes>
 
-            </BrowserRouter>
+            </HashRouter>
         </>
     )
 }
